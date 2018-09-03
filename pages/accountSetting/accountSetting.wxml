@@ -1,0 +1,5 @@
+<view class="baseContainer">
+    <view class="saveBtnView">
+        <button loading="{{ false }}" plain="{{true}}"  bindtap="bindSaveButton" hover-class="saveBtnHover" formType="submit" class="saveBtn {{saveBtnEnabled ? 'saveBtnNormal':'saveBtnDisable'}}" >保存</button>
+    </view>
+</view>

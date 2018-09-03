@@ -1,0 +1,5 @@
+<view class="container">
+    <view class="publishBtnView">
+        <button loading="{{ false }}" plain="{{true}}"  bindtap="bindPublishButton" hover-class="publishBtnHover" formType="submit" class="publishBtn {{publishBtnEnabled ? 'publishBtnNormal':'publishBtnDisable'}}" > 发布活动 </button>
+    </view>
+</view>

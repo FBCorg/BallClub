@@ -1,0 +1,32 @@
+{
+  "pages":[
+    "pages/homePage/homePage",
+    "pages/activity/activity",
+    "pages/index/index",
+    "pages/accountSetting/accountSetting",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "球宝",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color":"#52668C",
+    "selectedColor":"#3378DD",
+    "backgroundColor":"#fff",
+    "borderStyle":"white",
+    "list": [{
+      "pagePath": "pages/activity/activity",
+      "text": "活动",
+      "iconPath": "images/tabbar/common_icon_quote_normal.png",
+      "selectedIconPath": "images/tabbar/common_icon_quote_pressed.png"
+    }, {
+      "pagePath": "pages/homePage/homePage",
+      "text": "我的",
+      "iconPath": "images/tabbar/common_icon_mine_normal.png",
+      "selectedIconPath": "images/tabbar/common_icon_mine_pressed.png"
+    }]
+  }
+}

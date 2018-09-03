@@ -1,0 +1,30 @@
+<view class="baseContainer">
+    <view wx:if="{{!hasUserInfo}}" class="userAuthArea">
+        <view wx:if="{{canIUse}}">
+            <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录2 </button>
+        </view>
+    </view>
+    <view wx:else class="userHeaderArea">
+        <view class="userHead" bindlongtap="bintUserHeadTap">
+            <image style="width: 144rpx; height: 144rpx; border-radius: 8rpx; border: 1px solid rgba(0,0,0,0.08);" src="{{userInfo.avatarUrl}}"/>
+        </view>
+        <view class="userInfo">
+            <text class="userNameText"> {{ userInfo.nickName }}</text>
+            <text class="userStatusText"> {{ userStatus }} </text>
+        </view>
+        <view class="setting" bindtap="bindGotoSetting">
+            <view class="settingIcon pngfont png-setting"></view>
+        </view>
+    </view>
+    <view class="detailInfoArea">
+        <view class="tabSelectContainer">
+            <block wx:for="{{userInfoTabConfig}}" wx:key="item" wx:for-index="idx">
+                <view class="userInfoTapItem" id="{{idx}}" bindtap="bindChangeUserInfoTap">
+                    <view class="userInfoTapItem1 {{idx == userInfoTabChooseIdx ? 'tabSelected':'tabNormal'}}">
+                        <text> {{ item }} </text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
