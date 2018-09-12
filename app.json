@@ -2,6 +2,7 @@
   "pages":[
     "pages/homePage/homePage",
     "pages/activity/activity",
+    "pages/activityPublish/activityPublish",
     "pages/index/index",
     "pages/accountSetting/accountSetting",
     "pages/logs/logs"

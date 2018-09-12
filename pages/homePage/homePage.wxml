@@ -1,19 +1,17 @@
 <view class="baseContainer">
-    <view wx:if="{{!hasUserInfo}}" class="userAuthArea">
-        <view wx:if="{{canIUse}}">
-            <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录2 </button>
-        </view>
-    </view>
-    <view wx:else class="userHeaderArea">
+    <view class="userHeaderArea">
         <view class="userHead" bindlongtap="bintUserHeadTap">
-            <image style="width: 144rpx; height: 144rpx; border-radius: 8rpx; border: 1px solid rgba(0,0,0,0.08);" src="{{userInfo.avatarUrl}}"/>
+            <image style="width: 144rpx; height: 144rpx; border-radius: 8rpx; border: 1px solid rgba(0,0,0,0.08);" src="{{wxInfo.avatarUrl}}"/>
         </view>
         <view class="userInfo">
-            <text class="userNameText"> {{ userInfo.nickName }}</text>
+            <text class="userNameText"> {{ wxInfo.nickName }}</text>
             <text class="userStatusText"> {{ userStatus }} </text>
         </view>
-        <view class="setting" bindtap="bindGotoSetting">
+        <view wx:if="{{isClubMember}}" class="userOperate settingArea" bindtap="bindGotoSetting">
             <view class="settingIcon pngfont png-setting"></view>
+        </view>
+        <view wx:else class="userOperate joinView" bindtap="bindJoinClub">
+            <text class="joinText"> 加入球队 </text>
         </view>
     </view>
     <view class="detailInfoArea">
@@ -25,6 +23,16 @@
                     </view>
                 </view>
             </block>
+        </view>
+        <view wx:for="{{userInfoDisplayArr}}" wx:key="item" class="infoList">
+            <view class="infoItem">
+                <view class="infoItemTitle">
+                    <text class="infoItemFont">{{item.title}}</text>
+                </view>
+                <view class="infoItemValue">
+                    <text class="infoItemFont">{{item.value}}</text>
+                </view>
+            </view>
         </view>
     </view>
 </view>

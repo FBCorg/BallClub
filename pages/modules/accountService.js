@@ -2,7 +2,12 @@
  * Created by yongqiang on 2018/8/13.
  */
 
-import {kNRWxLogin, kNRUpdateUserInfo} from './util/constants'
+import {kNRWxLogin,
+    kNRUpdateUserInfo,
+    kNRSaveUserInfo,
+    kNRQueryMatchData,
+    kUserSexType,
+    kUserFootBallPositionType} from './util/constants'
 const network = require('./util/network');
 const Promise = require('./util/promise');
 const BDError = require('./util/BDError');
@@ -50,9 +55,9 @@ accountService.updateUserInfo = function (info) {
         url: kNRUpdateUserInfo,
         method: 'POST',
         data: {
-            name: info.name,
-            sex: info.sex,
-            age: info.age,
+            name: info.name ? info.name : getNickName(),
+            sex: info.sex ? info.sex : getSex(),
+            age: info.age ? info.age : getAge(),
             _: Date.now(),
         }
     }).then((res) => {
@@ -68,9 +73,10 @@ accountService.getUserInfo = function () {
         if (_userInfo.thirdSessionId !== '') {
             resolve(_userInfo);
         }
-        let loginInfo = StorageService.getStorageForGlobalSync({
-            'key': StorageKeys.LoginInfo
-        });
+        // let loginInfo = StorageService.getStorageForGlobalSync({
+        //     'key': StorageKeys.LoginInfo
+        // });
+        let loginInfo = null;
         if (!loginInfo) {
             wxLogin().then((res) => {
                 // console.log(LOG_TAG + 'bindWxLogin '+JSON.stringify(res));
@@ -104,7 +110,7 @@ accountService.getWxUserInfo = function () {
         return new Promise((resolve, reject) => {
             wx.getUserInfo({
                 success: res => {
-                    this.setWxInfo(res.userInfo);
+                    setWxInfo(res.userInfo);
                     resolve(res.userInfo);
                 },
                 fail: function (err) {
@@ -115,32 +121,76 @@ accountService.getWxUserInfo = function () {
     }
 }
 
-accountService.getNickName = function () {
+accountService.joinClub = function () {
+    return doRequest({
+        url: kNRSaveUserInfo,
+        method: 'POST',
+        data: {
+            name: getNickName(),
+            sex: getSex(),
+            age: getAge(),
+            footballPosition: getFootballPostion(),
+        }
+    }).then((res) => {
+        console.log(LOG_TAG + JSON.stringify(res));
+        return res;
+    }).catch((e) => {
+        console.log(LOG_TAG + JSON.stringify(e));
+    })
+}
+
+accountService.queryMatchData = function () {
+    return doRequest({
+        url: kNRQueryMatchData,
+        method: 'POST',
+        data: {
+
+        }
+    }).then((res) => {
+        console.log(LOG_TAG + JSON.stringify(res));
+        // return res;
+    }).catch((e) => {
+        console.log(LOG_TAG + JSON.stringify(e));
+    })
+}
+
+
+accountService.getThirdSessionId = function () {
+    if (_hasUserInfo) {
+        return _userInfo.thirdSessionId;
+    }
+    return "";
+}
+
+let getNickName = function () {
     if (_hasWxUserInfo) {
         return _wxInfo.nickName;
     }
     return 'dick';
 }
 
-accountService.getAge = function () {
+let getAge = function () {
+    if (_hasUserInfo) {
+        return _userInfo.age;
+    }
     return 18;
 }
 
-accountService.getSex =function () {
+let getSex = function () {
     if (_hasUserInfo) {
-        return _wxInfo.gender;
+        return _userInfo.sex;
     }
-    return 0;
+    return kUserSexType.Male.value;
 }
 
-accountService.getThirdSessionId = function () {
+let getFootballPostion = function () {
     if (_hasUserInfo) {
-        return _userInfo.thirdSessionId;
+        return _userInfo.footballPosition;
     }
-    return null;
+    return kUserFootBallPositionType.Keeper.value;
 }
 
-accountService.setWxInfo = function(info) {
+let setWxInfo = function(info) {
     _wxInfo = info;
     _hasWxUserInfo = true;
 };

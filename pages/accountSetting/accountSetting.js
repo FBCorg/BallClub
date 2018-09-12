@@ -15,9 +15,9 @@ Page({
 
     bindSaveButton: function (e) {
         let info = {
-            name: AccountService.getNickName(),
-            sex: AccountService.getSex(),
-            age: AccountService.getAge(),
+            // name: AccountService.getNickName(),
+            // sex: AccountService.getSex(),
+            // age: AccountService.getAge(),
         };
         AccountService.updateUserInfo(info);
     }

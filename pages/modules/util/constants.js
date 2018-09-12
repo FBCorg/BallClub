@@ -5,30 +5,33 @@
 const kNetworkRequestHeader = "https://www.995078.com/";
 const kNRWxLogin = kNetworkRequestHeader + 'wx/login';
 const kNRUpdateUserInfo = kNetworkRequestHeader + 'user/update';
-const kNRPublishActivity = kNetworkRequestHeader + 'activity/save';
+const kNRSaveUserInfo = kNetworkRequestHeader + 'user/save';
+const kNRActivityPublish = kNetworkRequestHeader + 'activity/save';
+const kNRActivityQueryAll = kNetworkRequestHeader + 'activity/queryAll';
+const kNRQueryMatchData = kNetworkRequestHeader + 'user/queryMatchData';
 
 
 let kUserSexType = {
-    Male: {value: 0, desc: 'Male'},
-    Female: {value: 1, desc: 'Female'}
+    Female: {value: 0, desc: '女'},
+    Male: {value: 1, desc: '男'}
 };
 
 let kUserRoleType = {
-    Admin: {value: 0, desc: 'Admin'},
-    Member: {value: 1, desc: 'Member'},
-    MemberUnCheck: {value: 2, desc: 'MemberUnCheck'},
-    Visitor: {value: 3, desc: 'Visitor'}
+    Admin: {value: 0, desc: '管理员'},
+    Member: {value: 1, desc: '会员'},
+    MemberUnCheck: {value: 2, desc: '待审会员'},
+    Visitor: {value: 3, desc: '访客'}
 };
 
 let kUserFootBallPositionType = {
-    Keeper: {value: 0, desc: 'Admin'},
-    CenterBack: {value: 1, desc: 'CenterBack'},
-    LeftSideBack: {value: 2, desc: 'LeftSideBack'},
-    RightSideBack: {value: 3, desc: 'RightSideBack'},
-    Forward: {value: 4, desc: 'Forward'},
-    LeftWinger: {value: 5, desc: 'LeftWinger'},
-    RightWinger: {value: 6, desc: 'RightWinger'},
-    CenterForward: {value: 7, desc: 'CenterForward'},
+    Keeper: {value: 0, desc: '门将'},
+    CenterBack: {value: 1, desc: '中后卫'},
+    LeftSideBack: {value: 2, desc: '左边后卫'},
+    RightSideBack: {value: 3, desc: '右边后卫'},
+    Forward: {value: 4, desc: '前锋'},
+    LeftWinger: {value: 5, desc: '左边锋'},
+    RightWinger: {value: 6, desc: '右边锋'},
+    CenterForward: {value: 7, desc: '中锋'},
 };
 
 
@@ -39,5 +42,8 @@ export {
     kNetworkRequestHeader,
     kNRWxLogin,
     kNRUpdateUserInfo,
-    kNRPublishActivity
+    kNRSaveUserInfo,
+    kNRQueryMatchData,
+    kNRActivityPublish,
+    kNRActivityQueryAll,
 }

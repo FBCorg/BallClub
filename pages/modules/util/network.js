@@ -32,14 +32,20 @@ network.doRequest = function(options) {
                 reject(new BDError('HTTP ERROR, Status ' + res.statusCode));
                 return;
             }
-            if(!res.data){ // res.data 数据才是我们服务器返回的是数据。故这里判断一下
+            if(!res.data){
+                // res.data 数据才是我们服务器返回的是数据。故这里判断一下
                 reject(new BDError('No Response Data.'));
                 return;
             }
-            // if(+res.data.code !== 0){
-            //     reject(new Error('ERROR: ' + res.data.message));
+            // if (res.data.errorCode != 0) {
+            //     // reject(extend(new BDError('Server Error'), res.data));
+            //     reject(res.data);
             //     return;
             // }
+            if(+res.data.errorCode !== 0){
+                reject(new BDError('ERROR: ' + res.data.errorMsg));
+                return;
+            }
             if( typeof options.isFail === 'function' && options.isFail(res.data)){// 因为各方定的协议不统一，故需要业务方自己判断是否成功。所有有isFail回调方法。该方法目前为可选
                 // console.log('isFail:', res.data);
                 reject(options.getError(res.data));
@@ -58,6 +64,7 @@ network.doRequest = function(options) {
         let AccountService = require('../accountService');
         if (!options.data.thirdSessionId && AccountService.getThirdSessionId()) {
             options.data.thirdSessionId = AccountService.getThirdSessionId();
+            extend(options.data, {_: Date.now()})
         }
         console.log('request content is ' + JSON.stringify(options));
 
@@ -66,7 +73,7 @@ network.doRequest = function(options) {
     });
 }
 
-network.doFormRequest=function(options){
+network.doFormRequest = function(options){
     options.header=extend(options.header,{
         'content-type': 'application/x-www-form-urlencoded'
     });

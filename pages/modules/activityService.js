@@ -2,15 +2,12 @@
  * Created by yongqiang on 2018/8/12.
  */
 
-import {kNRPublishActivity} from './util/constants'
+import {kNRActivityPublish, kNRActivityQueryAll} from './util/constants'
 const network = require('./util/network');
-const extend = require('./util/extend');
-const Promise = require('./util/promise');
 const BDError = require('./util/BDError');
 const StorageService = require('./storage/StorageService');
 const StorageKeys = require('./storage/StorageKeys');
 const LOG_TAG = 'ActivityService ';
-
 
 
 let activityService = {};
@@ -31,16 +28,29 @@ let doRequest = (options) => {
 }
 
 activityService.publishActivity = function (info) {
-    doRequest({
-        url: kNRPublishActivity,
+    return doRequest({
+        url: kNRActivityPublish,
         method: 'POST',
-        data: extend(info, {_: Date.now()})
+        data: info
     }).then((res) => {
-        console.log(LOG_TAG + JSON.stringify(res));
+        console.log(LOG_TAG + 'publishActivity' + JSON.stringify(res));
         return res;
     }).catch((e) => {
-        console.log(LOG_TAG + JSON.stringify(e));
+        console.log(LOG_TAG + 'publishActivity' + JSON.stringify(e));
     });
+}
+
+activityService.queryAllActivity = function () {
+    return doRequest({
+        url: kNRActivityQueryAll,
+        method: 'POST',
+        data: {}
+    }).then((res) => {
+        console.log(LOG_TAG + 'queryAllActivity' + JSON.stringify(res));
+        return res;
+    }).catch((e) => {
+        console.log(LOG_TAG + 'queryAllActivity' + JSON.stringify(e));
+    })
 }
 
 module.exports = activityService;
