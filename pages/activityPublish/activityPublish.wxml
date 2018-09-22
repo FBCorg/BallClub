@@ -1,4 +1,8 @@
 <view class="container">
+    <view class="titleView">
+        <input class="titleInput normalInput" placeholder-class="placeHolderInput" placeholder="{{placeholder}}" type="{{type}}" focus="{{focus}}" maxlength="{{maxlength > 0 ? maxlength : 50}}" value="{{value}}" bindchange="{{bindchange}}" bindinput="{{bindinput}}" bindfocus="{{bindfocus}}" bindblur="{{bindblur}}"  auto-focus/>
+    </view>
+
     <view class="publishBtnView">
         <button loading="{{ false }}" plain="{{true}}"  bindtap="bindPublishButton" hover-class="publishBtnHover" formType="submit" class="publishBtn {{publishBtnEnabled ? 'publishBtnNormal':'publishBtnDisable'}}" > 发布 </button>
     </view>

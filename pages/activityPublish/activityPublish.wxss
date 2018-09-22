@@ -1,5 +1,5 @@
 
-.baseContainer {
+.container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -46,4 +46,40 @@
 
 .publishBtnHover {
 
+}
+
+.titleView {
+    width: 100%;
+    height: 88rpx;
+    /*padding: 12rpx 21rpx 12rpx 21rpx;*/
+    /*position: relative;*/
+    background-color: #52668C;
+}
+
+.titleInput {
+    /*width: 100%;*/
+    position: absolute;
+    width: 598rpx;
+    /*height: 60rpx;*/
+
+    padding: 0 12rpx;
+    background: #FFFFFF;
+    border: 1rpx solid #DCE2EA;
+    border-radius: 4rpx;
+
+    z-index: 1;
+}
+
+.normalInput {
+    font-family: PingFang-SC-Regular;
+    font-size: 26rpx;
+    color: #000000;
+    letter-spacing: 0;
+}
+
+.placeHolderInput {
+    font-family: PingFang-SC-Regular;
+    font-size: 26rpx;
+    color: #B0BDC7;
+    letter-spacing: 0;
 }
