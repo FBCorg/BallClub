@@ -5,31 +5,38 @@ const LOG_TAG = 'ActivityPublish ';
 Page({
     data: {
         publishBtnEnabled: true,
-        placeholder: '活动标题',
-        focus: false,
         type: 'text',
         disabled: false,
-        maxlength: 30,
         value: '',
-        bindchange: 'bindTitleInputChanged',
-        bindinput: 'bindTitleInputFocus',
-        bindfocus: 'bindTitleInputInput',
-        bindblur: 'bindTitleInputBlur',
+        bindTitleInput: 'bindTitleInputInput',
+        bindContentInput: 'bindContentInputInput',
+        date: '2018-09-30',
+        time: '23:59',
     },
 
     onLoad: function () {
 
     },
 
-    bindTitleInputChanged: function(e) {},
-
-    bindTitleInputFocus: function(e) {},
-
     bindTitleInputInput: function(e) {
         let searchText = e.detail.value;
     },
 
-    bindTitleInputBlur: function(e) {},
+    bindContentInputInput: function(e) {},
+
+    bindDateChange: function(e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            date: e.detail.value
+        })
+    },
+
+    bindTimeChange: function(e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+            time: e.detail.value
+        })
+    },
 
     bindPublishButton: function (e) {
         let info = {

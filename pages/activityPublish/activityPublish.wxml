@@ -1,6 +1,30 @@
 <view class="container">
     <view class="titleView">
-        <input class="titleInput normalInput" placeholder-class="placeHolderInput" placeholder="{{placeholder}}" type="{{type}}" focus="{{focus}}" maxlength="{{maxlength > 0 ? maxlength : 50}}" value="{{value}}" bindchange="{{bindchange}}" bindinput="{{bindinput}}" bindfocus="{{bindfocus}}" bindblur="{{bindblur}}"  auto-focus/>
+        <input class="titleInput normalInput" placeholder-class="placeHolderInput" placeholder="活动标题" type="{{type}}" maxlength="50" value="{{value}}" bindinput="{{bindTitleInput}}" auto-focus/>
+    </view>
+
+    <view class="contentView">
+        <textarea class="contentInput normalInput" placeholder-class="placeHolderInput" placeholder="活动内容" maxlength="300" bindinput="{{bindContentInput}}" />
+    </view>
+
+    <view class="section">
+        <view class="timeTip">
+            <text class="textTip">报名截止时间：</text>
+        </view>
+        <view class="dateSection">
+            <picker class="test" mode="date" value="{{date}}" start="2017-09-01" end="2022-09-01" bindchange="bindDateChange">
+                <text class="textTip">
+                    {{date}}
+                </text>
+            </picker>
+        </view>
+        <view class="timeSection">
+            <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">
+                <text class="textTip">
+                    {{time}}
+                </text>
+            </picker>
+        </view>
     </view>
 
     <view class="publishBtnView">
